@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const ProductionLine = mongoose.model('ProductionLine');
+const repository = require('../repositories/productionLine-repository');
 
 // List
 exports.listProductionLines = async (req, res) => {
     try {
-        const data = await ProductionLine.find({});
+        const data = await repository.listProductionLines();
         res.status(200).send(data);
     } catch(e) {
         res.status(500).send({ message: 'Falha ao carregar as Linhas de Produção'});
@@ -14,7 +13,7 @@ exports.listProductionLines = async (req, res) => {
 // Create
 exports.createProductionLine = async (req, res) => {
     try {
-        const productionLine = new ProductionLine({
+        await repository.createProductionLine({
             name: req.body.name
         });
         
