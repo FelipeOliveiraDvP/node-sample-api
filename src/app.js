@@ -34,6 +34,9 @@ process.on('SIGINT', () => {
 // App
 const app = express();
 
+// Models
+const ProductionLine = require('./models/productionLine');
+
 // Routes
 const indexRoutes = require('./routes/index-routes');
 app.use('/', indexRoutes);
