@@ -2,10 +2,18 @@ const express = require('express');
 const mongose = require('mongoose');
 require('dotenv').config();
 
+// App
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Database
 mongose.connect(process.env.DATABASE_CONNECTION_STRING, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true
 });
 
 const db = mongose.connection;
@@ -31,9 +39,6 @@ process.on('SIGINT', () => {
     });
 });
 
-// App
-const app = express();
-
 // Models
 const ProductionLine = require('./models/productionLine');
 
@@ -41,4 +46,8 @@ const ProductionLine = require('./models/productionLine');
 const indexRoutes = require('./routes/index-routes');
 app.use('/', indexRoutes);
 
+const productionLineRoutes = require('./routes/productionLine-routes');
+app.use('/productionLine', productionLineRoutes);
+
+// Exports
 module.exports = app;
