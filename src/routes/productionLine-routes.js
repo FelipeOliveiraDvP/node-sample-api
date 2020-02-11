@@ -5,5 +5,7 @@ const productionLineController = require('../controllers/productionLine-controll
 // Production Line
 router.get('/', productionLineController.listProductionLines);
 router.post('/', productionLineController.createProductionLine);
+router.put('/:id', productionLineController.updateProductionLine);
+router.delete('/:id', productionLineController.removeProductionLine);
 
 module.exports = router;

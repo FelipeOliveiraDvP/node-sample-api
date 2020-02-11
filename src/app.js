@@ -13,7 +13,7 @@ mongose.connect(process.env.DATABASE_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: true
+    useFindAndModify: false
 });
 
 const db = mongose.connection;
